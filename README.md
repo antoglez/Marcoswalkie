@@ -1,54 +1,52 @@
 # MarcosWalkie PTT 🎙️
 
-MarcosWalkie es una aplicación de comunicación estilo **Push-to-Talk (PTT)** desarrollada en Flutter. Permite a los usuarios comunicarse de manera rápida mediante un sistema de transmisión activado por pulsación, con soporte para perfiles personalizados y una interfaz de superposición (overlay) que permite usar la funcionalidad mientras se navega por otras aplicaciones.
+MarcosWalkie es una aplicación de comunicación estilo **Push-to-Talk (PTT)** desarrollada en Flutter. Permite a los usuarios comunicarse mediante un sistema de transmisión activado por pulsación, con soporte para perfiles personalizados y una interfaz de "bola flotante" (overlay).
 
-## 🚀 Características Principales
+## 📥 Descarga Directa (APK)
 
-- **Interfaz PTT Intuitiva**: Control de transmisión sencillo con retroalimentación visual.
-- **Sistema de Overlay**: Widget de superposición que permite activar el PTT desde cualquier pantalla del sistema (usando `system_alert_window`).
-- **Gestión de Perfiles**: Crea y administra diferentes perfiles de configuración para distintas situaciones.
-- **Comunicación entre Isolates**: Arquitectura robusta que separa la lógica de la interfaz de la lógica de transmisión en segundo plano.
-- **Diseño Moderno**: Interfaz oscura (Dark Mode) con una estética premium basada en Material 3.
+Puedes encontrar la versión lista para instalar en el directorio raíz de este repositorio:
+👉 **[marcoswalkie.apk](./marcoswalkie.apk)**
 
-## 🛠️ Configuración y Requisitos
+## 🚀 Guía de Uso y Configuración
 
-### Requisitos Previos
+Para que la aplicación funcione correctamente, es necesario configurar ciertos permisos y entender cómo funcionan los "Intents".
 
-- **Flutter SDK**: ^3.8.1
-- **Android SDK**: Nivel de API mínimo 21 (Lollipop).
-- **Git**: Para el control de versiones.
+### 1. Configuración de la Bola Flotante (Overlay) 🟡
+La "bola flotante" permite usar el PTT mientras estás en otras aplicaciones (como Zello, navegadores o juegos).
+- **Permiso de Superposición**: Al abrir la app por primera vez, te pedirá permiso para "Mostrar sobre otras aplicaciones". **Debes concederlo** para que aparezca el botón flotante.
+- **Uso**: Una vez concedido, aparecerá un botón naranja en pantalla. Mantén pulsado para transmitir y suelta para detener.
 
-### Configuración del Proyecto
+### 2. Configuración de Intents (Acciones) ⚡
+La app funciona enviando "órdenes" (Intents) al sistema o a otras aplicaciones. En la sección de **Gestión de Perfiles**, puedes configurar:
 
-1. **Clonar el repositorio**:
-   ```bash
-   git clone https://github.com/antoglez/Marcoswalkie.git
-   cd Marcoswalkie
-   ```
+- **Acción de Inicio (Start Action)**: Qué orden enviar al pulsar el botón.
+- **Acción de Parada (Stop Action)**: Qué orden enviar al soltar el botón.
 
-2. **Instalar dependencias**:
-   ```bash
-   flutter pub get
-   ```
+#### Ejemplos de Configuración de Intents:
+- **Zello (PTT Estilo Walkie)**:
+  - Start Action: `com.zello.ptt.down`
+  - Stop Action: `com.zello.ptt.up`
+- **Acciones del Sistema (Pruebas)**:
+  - Abrir Ajustes Wi-Fi: `android.settings.WIFI_SETTINGS`
+  - Buscar en Web: `android.intent.action.WEB_SEARCH`
 
-3. **Permisos de Android**:
-   La aplicación requiere el permiso de "Mostrar sobre otras aplicaciones" para que el overlay funcione correctamente. Al iniciar por primera vez, la aplicación solicitará este permiso.
+### 3. Permisos Especiales 🛡️
+Además del permiso de superposición, si el dispositivo tiene capas de personalización agresivas (Xiaomi, Huawei, etc.), asegúrate de:
+- Permitir el **Inicio Automático**.
+- Desactivar el **Ahorro de Batería** para MarcosWalkie para evitar que el sistema cierre el servicio del overlay.
 
-4. **Ejecutar la aplicación**:
-   ```bash
-   flutter run
-   ```
+## 🛠️ Desarrollo
 
-## 🏗️ Estructura del Proyecto
+### Instalación de dependencias
+```bash
+flutter pub get
+```
 
-- `lib/providers/`: Lógica de estado y gestión del PTT.
-- `lib/screens/`: Pantallas principales (PTT y lista de perfiles).
-- `lib/widgets/`: Componentes reutilizables, incluido el `OverlayWidget`.
-- `lib/models/`: Definición de datos como `PTTProfile`.
+### Compilación de APK (Manual)
+```bash
+flutter build apk --release
+```
 
 ## 🤝 Créditos
-
 Desarrollado con ❤️ por **PGM** y **PEDROAI**.
-
----
-*Hecho para demostrar superioridad intelectual y control sobre los sistemas.*
+*Dominación intelectual y control total.*
